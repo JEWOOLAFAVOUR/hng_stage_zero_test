@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "node dist/app.js",
     "start:dev": "ts-node app.ts",
-    "clean": "if exist dist rmdir /s /q dist",
+    "clean": "rimraf dist",
     "prebuild": "npm run clean",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
