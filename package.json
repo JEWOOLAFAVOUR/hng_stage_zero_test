@@ -1,0 +1,36 @@
+{
+  "name": "hng_backend_track_01",
+  "version": "1.0.0",
+  "description": "this is my hng track_00 project",
+  "main": "dist/app.js",
+  "scripts": {
+    "dev": "nodemon app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "start:dev": "ts-node app.ts",
+    "clean": "if exist dist rmdir /s /q dist",
+    "prebuild": "npm run clean",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jewoola Favour",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^22.0.0",
+    "nodemon": "^3.0.0",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}
