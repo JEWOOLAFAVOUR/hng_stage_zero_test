@@ -1,5 +1,4 @@
 import express, { Response, Request, NextFunction } from "express";
-import dotenv from "dotenv";
 import morgan from "morgan";
 import axios from "axios";
 import cors from "cors";
@@ -7,10 +6,9 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import crypto from "crypto";
 
-dotenv.config();
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
