@@ -1,11 +1,13 @@
 # HNG Backend Track 01
 
-A TypeScript Express.js API that provides user information and random cat facts with security features and rate limiting.
+A TypeScript Express.js API that provides user information, random cat facts, and a complete string analysis service.
 
 ## Features
 
 - User profile endpoint with personal information
 - Random cat fact integration from external API
+- String analyzer service with filtering capabilities
+- Natural language query processing
 - Rate limiting (100 requests per 15 minutes)
 - Security headers with Helmet
 - CORS support
@@ -19,34 +21,51 @@ A TypeScript Express.js API that provides user information and random cat facts 
 
 Returns user information along with a random cat fact.
 
-**Response:**
+### String Analyzer Endpoints
+
+**POST /strings** - Analyze and store a string
 
 ```json
 {
-  "status": "success",
-  "user": {
-    "email": "jewoolafavour2020@gmail.com",
-    "name": "Jewoola Favour",
-    "stack": "Node.js/Express"
-  },
-  "timestamp": "2025-10-17T10:30:00.000Z",
-  "fact": "Cats sleep 70% of their lives."
+  "value": "hello world"
 }
 ```
 
+**GET /strings** - Get all strings with optional filtering
+
+- Query params: `is_palindrome`, `min_length`, `max_length`, `word_count`, `contains_character`
+
+**GET /strings/{string_value}** - Get specific string analysis
+
+**GET /strings/filter-by-natural-language** - Filter using natural language
+
+- Example: `?query=all single word palindromic strings`
+
+**DELETE /strings/{string_value}** - Remove a string
+
+### String Analysis Features
+
+Each analyzed string includes:
+
+- Length and word count
+- Palindrome detection
+- Unique character count
+- SHA-256 hash for identification
+- Character frequency mapping
+
 ## Technologies Used
 
-- Node.js
-- Express.js
+- Node.js & Express.js
 - TypeScript
 - Axios for HTTP requests
+- Built-in crypto module for SHA-256 hashing
 - Express Rate Limit for API protection
 - Helmet for security headers
 - Morgan for request logging
 - CORS for cross-origin requests
 - Dotenv for environment variables
 
-## Installation
+## Getting Started
 
 1. Clone the repository
 
@@ -61,63 +80,44 @@ cd hng_stage_zero_test
 npm install
 ```
 
-3. Create a .env file (optional)
+3. Create .env file (optional)
 
 ```bash
 PORT=3000
 ```
 
-## Development
-
-Run in development mode with auto-reload:
+4. Start development server
 
 ```bash
 npm run dev
 ```
 
-Run TypeScript directly:
+## Available Scripts
+
+- `npm run dev` - Development with auto-reload
+- `npm run build` - Build TypeScript to JavaScript
+- `npm start` - Run production build
+- `npm run clean` - Remove build files
+
+## Testing the API
+
+Try these example requests:
 
 ```bash
-npm run start:dev
+# Get user info
+curl http://localhost:3000/me
+
+# Analyze a string
+curl -X POST http://localhost:3000/strings \
+  -H "Content-Type: application/json" \
+  -d '{"value": "racecar"}'
+
+# Get palindromes only
+curl "http://localhost:3000/strings?is_palindrome=true"
+
+# Natural language search
+curl "http://localhost:3000/strings/filter-by-natural-language?query=single%20word%20palindromes"
 ```
-
-## Production
-
-Build the TypeScript code:
-
-```bash
-npm run build
-```
-
-Start the production server:
-
-```bash
-npm start
-```
-
-Clean build files:
-
-```bash
-npm run clean
-```
-
-## Security Features
-
-- Rate limiting to prevent API abuse
-- Security headers via Helmet middleware
-- CORS configuration for cross-origin requests
-- Input timeout handling for external API calls
-- Global error handling middleware
-- 404 route handling
-
-## Error Handling
-
-The API includes comprehensive error handling:
-
-- External API failures are gracefully handled
-- Rate limiting returns appropriate error messages
-- 404 responses for undefined routes
-- Global error handler for unexpected errors
 
 ## Author
 
